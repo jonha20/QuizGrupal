@@ -19,6 +19,7 @@ body {
   color: var(--color-primario);
   display: flex;
   align-items: center;
+  gap: 5em;
   flex-direction: column;
 }
 
