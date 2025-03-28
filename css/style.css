@@ -22,10 +22,18 @@ body {
   gap: 5em;
   flex-direction: column;
 }
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+}
 
-p {
+article p {
   justify-content: center;
   text-align: center;
+  font-size: 1.5em;
 }
 
 main {
@@ -34,19 +42,39 @@ main {
   flex-direction: column;
 }
 
-/* section {
-  width: 80%;
-  display: flex;
-  text-align: center;
-  font-size: 1.3em;
-  font-weight: 600;
-} */
-
 article {
   width: 80%;
+  height: 100%;
   margin: 0 auto;
+  padding:7em;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px var(--color-secundario);
 }
-
-#answer-section {
+li{
+  margin: 0.5em 0;
+  list-style: none;
+  padding: 0.7em;
+  font-size: 1.2em;
+  border-radius:12px;
+  background-color: var(--color-primario);
+  color: var(--color-secundario);
+  box-shadow: 0px 0px 10px var(--color-secundario);
+}
+footer {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  justify-content: center;
   align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+  padding-bottom: 1em;
 }
+#answer-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 2em;
+  width: 80%;
+} 
