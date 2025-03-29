@@ -88,6 +88,7 @@ async function getData() {
     // Tratamiento + representar gráficamente los datos. Pasos 2-3
     paintQuestions(data.results);
     checkAnswer(data.results);
+    paintGraph ()
   } catch (error) {
     // Manejar el error de manera personalizada
     if (error.message.includes("404")) {
@@ -100,3 +101,5 @@ async function getData() {
   }
 }
 getData();
+
+// function paintGraph 
