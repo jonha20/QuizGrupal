@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz presentacion </title>
+    <link rel="stylesheet" href="../css/style.css" /> <!--si no les funciona solo quiten los dos puntos-->
+  </head>
+  <body id ="home">
+    <header class="header">
+      <h1>Bienvenidos al Quiz</h1>
+    </header>
+    <main>
+      <!--formulario de registro-->
+      <section class="registration-form">
+        <h3>Registro:</h3>
+        <form id="registration-form">
+          <label for="username">Nombre de usuario</label>
+          <input type="text" id="username" name="username" required>
+
+          <label for="email">Correo electronico</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" required>
+          
+          <button type="submit"> Registrarse</button>
+        </form>
+      </article>
+      <!--boton  para empezar el quiz(registrado)-->
+      <section class="start-quiz-registered">
+        <p>haz click en el siguiente boton  para empezar con el Quiz</p>
+        <a href="questions.html">
+          <button class="btn">Empezar Quiz</button>
+        </a>
+      </article>
+      <section class="start-quiz">
+         <!--boton para empezar el quiz(sin registrar)-->
+        <p>haz click en el siguiente boton  para empezar  el Quiz sin Registrarse</p>
+        <a href="questions.html">
+          <button class="btn">Empezar Quiz sin Registrarse</button>
+        </a>
+      </article>
+
+    <footer >
+      <p>Creado por DS, JM, IT</p>
+    </footer>
+  </main>
+  </body>
+</html>
