@@ -101,5 +101,3 @@ async function getData() {
   }
 }
 getData();
-
-// function paintGraph 
