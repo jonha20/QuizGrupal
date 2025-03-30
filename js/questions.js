@@ -1,3 +1,17 @@
+// FIREBASE CONFIGURATION
+const firebaseConfig = {
+  apiKey: "AIzaSyBWb1Dn92SCNUbWnn6SWQVF4UaMxypPm9s",
+  authDomain: "quiz-grupal.firebaseapp.com",
+  projectId: "quiz-grupal",
+  storageBucket: "quiz-grupal.firebasestorage.app",
+  messagingSenderId: "589625917984",
+  appId: "1:589625917984:web:2c7a74a3ccfeff9bfef245",
+};
+
+// FIREBASE INITIALIZATION
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 function paintQuestions(dataset) {
   // 2 - Tratamiento de datos
 
@@ -88,7 +102,7 @@ async function getData() {
     // Tratamiento + representar gráficamente los datos. Pasos 2-3
     paintQuestions(data.results);
     checkAnswer(data.results);
-    paintGraph ()
+    paintGraph();
   } catch (error) {
     // Manejar el error de manera personalizada
     if (error.message.includes("404")) {
