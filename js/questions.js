@@ -1,49 +1,38 @@
 // FIREBASE CONFIGURATION
-const firebaseConfig = {
-  apiKey: "AIzaSyBWb1Dn92SCNUbWnn6SWQVF4UaMxypPm9s",
-  authDomain: "quiz-grupal.firebaseapp.com",
-  projectId: "quiz-grupal",
-  storageBucket: "quiz-grupal.firebasestorage.app",
-  messagingSenderId: "589625917984",
-  appId: "1:589625917984:web:2c7a74a3ccfeff9bfef245",
+let firebaseConfig = {
+  apiKey: "AIzaSyBjTSABchzKfRpzqMCvUiZT-c-0GTCAtnc",
+  authDomain: "pruebadatabase-7e515.firebaseapp.com",
+  projectId: "pruebadatabase-7e515",
+  storageBucket: "pruebadatabase-7e515.firebasestorage.app",
+  messagingSenderId: "299548159984",
+  appId: "1:299548159984:web:6493e90ad4f315439ff735",
+  measurementId: "G-TBR64S993K",
 };
 
-// FIREBASE INITIALIZATION
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+//firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
+
+//const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
 
 function paintQuestions(dataset) {
-  // 2 - Tratamiento de datos
-
-  // Forma 1. Ineficiente con 2 iteraciones
-  // const listFilms = dataset.map((films) => `prod${films.id}`);
-  // const listDate = dataset.map((films) => films.price);
-
-  // Forma 2. Eficiente con 1 iteración
-
-  dataset.forEach((questions) => {
-    document.getElementById("questions-section").innerHTML = "";
-    document.getElementById("questions-section").innerHTML = `
+  document.getElementById("questions-section").innerHTML = "";
+  document.getElementById("questions-section").innerHTML = `
            <article>
-          <p>${questions.question}</p>
+          <p>${dataset.question}</p>
         </article> `;
-    document.getElementById("answer-section").innerHTML = "";
+  document.getElementById("answer-section").innerHTML = "";
 
-    const allAnswers = [
-      questions.correct_answer,
-      ...questions.incorrect_answers,
-    ];
-    const shuffledAnswers = shuffleArray([...allAnswers]);
+  const allAnswers = [dataset.correct_answer, ...dataset.incorrect_answers];
+  const shuffledAnswers = shuffleArray([...allAnswers]);
 
-    document.getElementById("answer-section").innerHTML = `
+  document.getElementById("answer-section").innerHTML = `
     
-        ${shuffledAnswers
-          .map(
-            (answer) => `<li onclick="checkAnswer('${answer}')">${answer}</li>`
-          )
-          .join("")}
+    ${shuffledAnswers
+      .map(
+        (answer) =>
+          `<li onclick="checkAnswer('${answer}', '${dataset.correct_answer}')">${answer}</li>`
+      )
+      .join("")}
       `;
-  });
 }
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -52,33 +41,36 @@ function shuffleArray(array) {
   }
   return array;
 }
-function checkAnswer(questions) {
+function checkAnswer(selectedAnswer, correctAnswer) {
   const listItems = document.querySelectorAll("#answer-section li");
-  const feedback = document.getElementById("feedback");
-  console.log(questions);
 
   listItems.forEach((item) => {
     item.classList.remove("selected", "incorrect");
     if (item.textContent === selectedAnswer) {
       item.classList.add(
-        selectedAnswer === questions.correct_answer ? "selected" : "incorrect"
+        selectedAnswer === correctAnswer ? "selected" : "incorrect"
       );
     }
-    if (item.textContent === questions.correct_answer) {
+    if (item.textContent === correctAnswer) {
       item.classList.add("selected");
     }
   });
 
   // Mostrar feedback
-  if (selectedAnswer === questions.correct_answer) {
-    feedback.innerHTML = "<p style='color:green;'>¡Correcto! 😊</p>";
+  if (selectedAnswer == null) {
   } else {
-    feedback.innerHTML =
+    if (selectedAnswer === correctAnswer) {
+      alert("¡Correcto!"); // feedback.innerHTML = "<p style='color:green;'>¡Correcto! 😊</p>";
+    } else {
+      alert("Incorrecto, la respuesta correcta era: " + correctAnswer);
+      /*feedback.innerHTML =
       "<p style='color:red;'>Incorrecto. La respuesta correcta es <strong>" +
-      questions.correct_answer +
-      "</strong>.</p>";
+      correctAnswer +
+      "</strong>.</p>";*/
+    }
   }
 }
+// Habilitar visualmente el botón de siguiente
 
 async function getData() {
   try {
@@ -95,14 +87,23 @@ async function getData() {
         throw new Error(`Error HTTP: ${response.status}`);
       }
     }
-
+    let currentQuestionIndex = 0;
+    let contadorPreguntas = 1;
     const data = await response.json();
-    console.log(data.results);
 
     // Tratamiento + representar gráficamente los datos. Pasos 2-3
-    paintQuestions(data.results);
-    checkAnswer(data.results);
-    paintGraph();
+    document.getElementById("next-button").addEventListener("click", () => {      
+      document.getElementById("pregunta").innerHTML = `Pregunta ${contadorPreguntas}/10`
+      console.log(data.results[currentQuestionIndex]);
+      paintQuestions(data.results[currentQuestionIndex]);
+      checkAnswer(data.results[currentQuestionIndex]);
+      if (currentQuestionIndex >= 9) {
+        // Fin del quiz
+        alert("Quiz completado!");
+      }
+      currentQuestionIndex++
+      contadorPreguntas++
+    });
   } catch (error) {
     // Manejar el error de manera personalizada
     if (error.message.includes("404")) {
