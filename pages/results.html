@@ -9,22 +9,18 @@
   <body>
     <!--CHART.JS CHART DIV-->
     <div>
-      <canvas id="myChart"></canvas>
+      <canvas id="myChart" width="400" height="200"></canvas>
     </div>
-    <!--LINK TO CHART.JS-->
+
+    <!-- Cargar la librería Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!--LINK TO CHART.JS-->
-    <script src="/js/chart.js"></script>
 
-    <!-- <script src="/js/answers.js"></script> -->
-    <script src="/js/questions.js"></script>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- Cargar Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-   https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+
+    <!-- Tu archivo Chart.js con la lógica de la gráfica -->
+    <script src="/js/chart.js"></script>
   </body>
 </html>
