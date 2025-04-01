@@ -1,5 +1,5 @@
 // FIREBASE CONFIGURATION
-let firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyBjTSABchzKfRpzqMCvUiZT-c-0GTCAtnc",
   authDomain: "pruebadatabase-7e515.firebaseapp.com",
   projectId: "pruebadatabase-7e515",
@@ -92,8 +92,10 @@ async function getData() {
     const data = await response.json();
 
     // Tratamiento + representar gráficamente los datos. Pasos 2-3
-    document.getElementById("next-button").addEventListener("click", () => {      
-      document.getElementById("pregunta").innerHTML = `Pregunta ${contadorPreguntas}/10`
+    document.getElementById("next-button").addEventListener("click", () => {
+      document.getElementById(
+        "pregunta"
+      ).innerHTML = `Pregunta ${contadorPreguntas}/10`;
       console.log(data.results[currentQuestionIndex]);
       paintQuestions(data.results[currentQuestionIndex]);
       checkAnswer(data.results[currentQuestionIndex]);
@@ -101,8 +103,8 @@ async function getData() {
         // Fin del quiz
         alert("Quiz completado!");
       }
-      currentQuestionIndex++
-      contadorPreguntas++
+      currentQuestionIndex++;
+      contadorPreguntas++;
     });
   } catch (error) {
     // Manejar el error de manera personalizada
