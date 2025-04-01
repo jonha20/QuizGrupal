@@ -1,18 +1,19 @@
-// FIREBASE CONFIGURATION
 const firebaseConfig = {
-  apiKey: "AIzaSyBjTSABchzKfRpzqMCvUiZT-c-0GTCAtnc",
-  authDomain: "pruebadatabase-7e515.firebaseapp.com",
-  projectId: "pruebadatabase-7e515",
-  storageBucket: "pruebadatabase-7e515.firebasestorage.app",
-  messagingSenderId: "299548159984",
-  appId: "1:299548159984:web:6493e90ad4f315439ff735",
-  measurementId: "G-TBR64S993K",
+  apiKey: "AIzaSyBWb1Dn92SCNUbWnn6SWQVF4UaMxypPm9s",
+  authDomain: "quiz-grupal.firebaseapp.com",
+  projectId: "quiz-grupal",
+  storageBucket: "quiz-grupal.firebasestorage.app",
+  messagingSenderId: "589625917984",
+  appId: "1:589625917984:web:2c7a74a3ccfeff9bfef245"
 };
 
-//firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
 
-//const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+firebase.initializeApp(firebaseConfig); // Inicializaar app Firebase
 
+const db = firebase.firestore(); // db representa mi BBDD //inicia Firestore
+
+let aciertos = 0
+let nombre = prompt("Introduce tu Nombre")
 function paintQuestions(dataset) {
   document.getElementById("questions-section").innerHTML = "";
   document.getElementById("questions-section").innerHTML = `
@@ -34,6 +35,7 @@ function paintQuestions(dataset) {
       .join("")}
       `;
 }
+
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -43,7 +45,6 @@ function shuffleArray(array) {
 }
 function checkAnswer(selectedAnswer, correctAnswer) {
   const listItems = document.querySelectorAll("#answer-section li");
-
   listItems.forEach((item) => {
     item.classList.remove("selected", "incorrect");
     if (item.textContent === selectedAnswer) {
@@ -55,22 +56,27 @@ function checkAnswer(selectedAnswer, correctAnswer) {
       item.classList.add("selected");
     }
   });
-
+  
   // Mostrar feedback
   if (selectedAnswer == null) {
   } else {
     if (selectedAnswer === correctAnswer) {
-      alert("¡Correcto!"); // feedback.innerHTML = "<p style='color:green;'>¡Correcto! 😊</p>";
+      aciertos++
+      console.log("¡Correcto!"); 
     } else {
-      alert("Incorrecto, la respuesta correcta era: " + correctAnswer);
-      /*feedback.innerHTML =
-      "<p style='color:red;'>Incorrecto. La respuesta correcta es <strong>" +
-      correctAnswer +
-      "</strong>.</p>";*/
+      console.log("Incorrecto, la respuesta correcta era: " + correctAnswer);
+      
     }
   }
 }
-// Habilitar visualmente el botón de siguiente
+const writeNameDB = (array) => {
+  db.collection("quiz")
+  .add(array)
+  .then((docRef) => {
+    console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => console.error("Error adding document: ", error));
+};
 
 async function getData() {
   try {
@@ -89,6 +95,7 @@ async function getData() {
     }
     let currentQuestionIndex = 0;
     let contadorPreguntas = 1;
+    
     const data = await response.json();
 
     // Tratamiento + representar gráficamente los datos. Pasos 2-3
@@ -99,9 +106,15 @@ async function getData() {
       console.log(data.results[currentQuestionIndex]);
       paintQuestions(data.results[currentQuestionIndex]);
       checkAnswer(data.results[currentQuestionIndex]);
-      if (currentQuestionIndex >= 9) {
+      if (currentQuestionIndex >= 2) {
         // Fin del quiz
         alert("Quiz completado!");
+        document.getElementById("answer-section").innerHTML = ""
+        const formData = {
+          name: nombre,
+          aciertos: aciertos
+        };
+        writeNameDB(formData);
       }
       currentQuestionIndex++;
       contadorPreguntas++;
