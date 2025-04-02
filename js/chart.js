@@ -1,26 +1,40 @@
 // INICIALIZAR FIREBASE
-var firebaseConfig = {
-  apiKey: "AIzaSyBjTSABchzKfRpzqMCvUiZT-c-0GTCAtnc",
-  authDomain: "pruebadatabase-7e515.firebaseapp.com",
-  projectId: "pruebadatabase-7e515",
-  storageBucket: "pruebadatabase-7e515.firebasestorage.app",
-  messagingSenderId: "299548159984",
-  appId: "1:299548159984:web:6493e90ad4f315439ff735",
-  measurementId: "G-TBR64S993K",
+const firebaseConfig = {
+  apiKey: "AIzaSyBWb1Dn92SCNUbWnn6SWQVF4UaMxypPm9s",
+  authDomain: "quiz-grupal.firebaseapp.com",
+  projectId: "quiz-grupal",
+  storageBucket: "quiz-grupal.firebasestorage.app",
+  messagingSenderId: "589625917984",
+  appId: "1:589625917984:web:2c7a74a3ccfeff9bfef245",
 };
 
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
+db.collection("partidas")
+  .get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+    });
+  });
+
 function fetchFirebaseData() {
   return db
-    .collection("resultados")
+    .collection("partidas")
     .get()
     .then((querySnapshot) => {
       let data = [];
       querySnapshot.forEach((doc) => {
-        data.push(doc.data());
+        let docData = doc.data();
+        data.push({
+          name: docData.name,
+          aciertos: docData.aciertos || 0,
+        });
       });
+
+      console.log("Datos obtenidos:", data); // <-- Verificar en consola
+
       renderChart(data);
     })
     .catch((error) => {
@@ -29,8 +43,8 @@ function fetchFirebaseData() {
 }
 
 function renderChart(data) {
-  const labels = data.map((item) => item.Nombre);
-  const scores = data.map((item) => item.Aciertos);
+  const labels = data.map((item) => item.name);
+  const scores = data.map((item) => item.aciertos);
 
   const ctx = document.getElementById("myChart").getContext("2d");
 
