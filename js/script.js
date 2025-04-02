@@ -1,27 +1,105 @@
-// // Array para almacenar los contactos//
-// let contactos = JSON.parse(localStorage.getItem('contactos')) ||[];
-// document.querySelector("form").addEventListener("submit", function(event) {
-//  event.preventDefault();
-    
-// Obtener valores de el formulario//
-//  const nuevoContacto = {
-//      username: document.getElementById("username").value,
-//      email: document.getElementById("email").value,
-//      password: document.getElementById("password").value,
-//     }
-//     contactos.push(nuevoContacto)
-//     localStorage.setItem("contactos", JSON.stringify(contactos));
-//     })
+const firebaseConfig = {
+  apiKey: "AIzaSyBWb1Dn92SCNUbWnn6SWQVF4UaMxypPm9s",
+  authDomain: "quiz-grupal.firebaseapp.com",
+  projectId: "quiz-grupal",
+  storageBucket: "quiz-grupal.firebasestorage.app",
+  messagingSenderId: "589625917984",
+  appId: "1:589625917984:web:2c7a74a3ccfeff9bfef245"
+};
+firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
 
-var firebaseConfig = {
-    apiKey: "AIzaSyBjTSABchzKfRpzqMCvUiZT-c-0GTCAtnc",
-    authDomain: "pruebadatabase-7e515.firebaseapp.com",
-    projectId: "pruebadatabase-7e515",
-    storageBucket: "pruebadatabase-7e515.firebasestorage.app",
-    messagingSenderId: "299548159984",
-    appId: "1:299548159984:web:6493e90ad4f315439ff735",
-    measurementId: "G-TBR64S993K",
-  };
-  
-  firebase.initializeApp(firebaseConfig);
-  var db = firebase.firestore();
+const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+
+
+
+//**********AUTHENTICATION**********
+const createUser = (user) => {
+  db.collection("users")
+    .add(user)
+    .then((docRef) => console.log("Document written with ID: ", docRef.id))
+    .catch((error) => console.error("Error adding document: ", error));
+};
+
+const signUpUser = (email, password) => {
+firebase
+  .auth()
+  .createUserWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    let user = userCredential.user;
+    console.log(`se ha registrado ${user.email} ID:${user.uid}`)
+    alert(`se ha registrado ${user.email} ID:${user.uid}`)
+    // ...
+    // Saves user in firestore
+    createUser({
+      email: user.email,
+      id: user.id,
+    });
+
+  })
+  .catch((error) => {
+    console.log("Error en el sistema" + error.message, "Error: " + error.code);
+  });
+};
+
+
+document.getElementById("form1").addEventListener("submit", function (event) {
+event.preventDefault();
+let email = event.target.elements.email.value;
+let pass = event.target.elements.pass.value;
+let pass2 = event.target.elements.pass2.value;
+
+pass === pass2 ? signUpUser(email, pass) : alert("error password");
+})
+
+
+const signInUser = (email, password) => {
+firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    let user = userCredential.user;
+    console.log(`se ha logado ${user.email} ID:${user.uid}`)
+    alert(`se ha logado ${user.email} ID:${user.uid}`)
+    console.log("USER", user);
+  })
+  .catch((error) => {
+    let errorCode = error.code;
+    let errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorMessage)
+  });
+}
+
+
+const signOut = () => {
+let user = firebase.auth().currentUser;
+
+firebase.auth().signOut().then(() => {
+  console.log("Sale del sistema: " + user.email)
+}).catch((error) => {
+  console.log("hubo un error: " + error);
+});
+}
+
+
+document.getElementById("form2").addEventListener("submit", function (event) {
+event.preventDefault();
+let email = event.target.elements.email2.value;
+let pass = event.target.elements.pass3.value;
+signInUser(email, pass)
+window.location.href = "./questions.html";
+})
+document.getElementById("salir").addEventListener("click", signOut);
+
+// Listener de usuario en el sistema
+// Controlar usuario logado
+firebase.auth().onAuthStateChanged(function (user) {
+if (user) {
+  console.log(`Está en el sistema:${user.email} ${user.uid}`);
+} else {
+  console.log("no hay usuarios en el sistema");
+}
+});
+
+
+
