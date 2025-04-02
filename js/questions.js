@@ -73,8 +73,17 @@ function checkAnswer(selectedAnswer, correctAnswer) {
     }
   });
 }
+// Funcion para eliminar todo
+const goResults = () => {
+  const results = confirm("¿Quieres ver los resultados?");
+  if (results) {
+    window.location.href = "./results.html";
+  } else{
+    location.reload();
+  }
+};
 const writeNameDB = (array) => {
-  db.collection("quiz")
+  db.collection("partidas")
   .add(array)
   .then((docRef) => {
     console.log("Document written with ID: ", docRef.id);
@@ -119,6 +128,7 @@ async function getData() {
           aciertos: aciertos
         };
         writeNameDB(formData);
+        goResults();
       }
 
       currentQuestionIndex++;
