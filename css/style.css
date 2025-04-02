@@ -35,6 +35,7 @@
   margin-bottom: 10px;
   letter-spacing: 2px;
 }
+
 p{
   font-size: 1.2rem;
   margin-bottom: 20px;
@@ -73,6 +74,7 @@ form button:hover
   transition: all 0.3s ease-in-out;
 }
 
+/*question*/
 
 body {
   background-color: var(--color-fondo);
@@ -145,7 +147,7 @@ li {
   color: var(--color-primario);
 };
 
-footer{
+.footer{
   display: block;
   position: fixed;
   bottom: 0;
