@@ -9,6 +9,7 @@
   <body >
     <header >
       <h1>Bienvenidos al Quiz</h1>
+        <button id="salir">Logout</button>
     </header>
     <main>
       <!--formulario de registro-->
@@ -17,7 +18,6 @@
                     <h3>Formulario de Registro</h3>
                     <form id="form1" action="#" method="POST">
                         <div>
-                          
                             <label for="email">Email:</label><br>
                             <input type="email" id="email" name="email" placeholder="Introduce email..."><br>
                             <label for="pass">Password:</label><br>
@@ -40,20 +40,12 @@
                             <input type="submit" value="Enviar">
                         </div>
                     </form>
-                    <a href="/QuizGrupal/pages/questions.html">
+                    <a href="./questions.html">
                       <button class="btn">Click aquí para empezar Quiz sin registrarse</button>
                     </a>
                 </div>
-                <div>
-                    <h3>Logout</h3>
-                    <div id="logout">
-                        <button id="salir">Logout</button>
-                    </div>
-
-                </div>
             </div>
         </section> 
-
     </main>
     <footer>
 
@@ -67,7 +59,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
 
-    <script src="/QuizGrupal/js/script.js"></script>
+    <script src="../js/script.js"></script>
     
 </body>
 
