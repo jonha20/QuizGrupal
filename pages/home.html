@@ -6,45 +6,54 @@
     <title>Quiz presentacion </title>
     <link rel="stylesheet" href="../css/style.css" /> <!--si no les funciona solo quiten los dos puntos-->
   </head>
-  <body id ="home">
-    <header class="header">
+  <body >
+    <header >
       <h1>Bienvenidos al Quiz</h1>
     </header>
     <main>
       <!--formulario de registro-->
-      <section class="registration-form">
-        <h3>Registro:</h3>
-        <form id="registration-form">
-          <label for="username">Nombre de usuario</label>
-          <input type="text" id="username" name="username" required>
-
-          <label for="email">Correo electronico</label>
-          <input type="email" id="email" name="email" required>
-
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" name="password" required>
-          
-          <button type="submit"> Registrarse</button>
+  
+     <section class="registration-form">
+        <h2> formulario de Registro:</h2>
+       <form id="form1" action="#" method="POST">
+        <div id="forms-container">
+          <div>
+          <label for="email">Correo electronico:</label>
+          <input type="email" id="email" name="email" placeholder="introduce email" required><br>
+          <label for="password">Contraseña:</label>
+          <input type="pass" id="pass" name="pass" placeholder="introduce password" required><br>
+          <label for="password2">Repite password:</label><br>
+          <input type="pass2" id="pass2" name="pass2" placeholder="Repite password" required><br><br>
+          <input type="submit" value="enviar">
+          </div>
         </form>
+        <div>
+          <h3>Login:</h3>
+          <form id="form2" action="#" method="POST">
+              <div>
+                  <label for="email2">Correo electronico:</label><br>
+                  <input type="email2" id="email2" name="email2" placeholder="Introduce tu Correo"><br>
+                  <label for="pass3">Password:</label><br>
+                  <input type="password3" id="pass3" name="pass3" placeholder="Introduce Contraseña"><br>
+                  <button id="Login">Login</button><br>
+              </div>
+          </form>
+      </div>
+      <a href="/pages/questions.html">
+        <button class="btn">Click aquí para empezar Quiz sin registrarse</button>
+      </a>
       </section>
-      <!--boton  para empezar el quiz(registrado)-->
-      <section class="start-quiz-registered">
-        <p>haz click en el siguiente boton  para empezar con el Quiz</p>
-        <a href="questions.html">
-          <button class="btn">Empezar Quiz</button>
-        </a>
-      </section>
-      <section class="start-quiz">
-         <!--boton para empezar el quiz(sin registrar)-->
-        <p>haz click en el siguiente boton  para empezar  el Quiz sin Registrarse</p>
-        <a href="questions.html">
-          <button class="btn">Empezar Quiz sin Registrarse</button>
-        </a>
-      </section>
-    <footer >
+    </main>
+    <footer>
       <p>Creado por DS, JM, IT</p>
     </footer>
-  </main>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+
+     <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
     <script src="/js/script.js"></script>
   </body>
 </html>
