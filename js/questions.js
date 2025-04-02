@@ -44,30 +44,34 @@ function shuffleArray(array) {
   return array;
 }
 function checkAnswer(selectedAnswer, correctAnswer) {
-  const listItems = document.querySelectorAll("#answer-section li");
-  listItems.forEach((item) => {
-    item.classList.remove("selected", "incorrect");
-    if (item.textContent === selectedAnswer) {
-      item.classList.add(
-        selectedAnswer === correctAnswer ? "selected" : "incorrect"
-      );
-    }
-    if (item.textContent === correctAnswer) {
-      item.classList.add("selected");
+  const answerElements = document.querySelectorAll('#answer-section li');
+  
+  answerElements.forEach(questionColor => {
+    // Resetear estilos
+    questionColor.style.backgroundColor = '';
+    questionColor.style.color = '';
+    questionColor.style.textDecoration = '';
+    
+    if (questionColor.textContent === selectedAnswer) {
+      if (selectedAnswer === correctAnswer) {
+        questionColor.style.backgroundColor = '#4CAF50';
+        questionColor.style.color = 'white';
+        aciertos++;
+      } else {
+        questionColor.style.backgroundColor = '#F44336';
+        questionColor.style.color = 'white';
+        questionColor.style.textDecoration = 'line-through';
+        
+        // Resaltar la correcta
+        answerElements.forEach(correctQuestion => {
+          if (correctQuestion.textContent === correctAnswer) {
+            correctQuestion.style.backgroundColor = '#4CAF50';
+            correctQuestion.style.color = 'white';
+          }
+        });
+      }
     }
   });
-  
-  // Mostrar feedback
-  if (selectedAnswer == null) {
-  } else {
-    if (selectedAnswer === correctAnswer) {
-      aciertos++
-      console.log("¡Correcto!"); 
-    } else {
-      console.log("Incorrecto, la respuesta correcta era: " + correctAnswer);
-      
-    }
-  }
 }
 const writeNameDB = (array) => {
   db.collection("quiz")
@@ -106,7 +110,7 @@ async function getData() {
       console.log(data.results[currentQuestionIndex]);
       paintQuestions(data.results[currentQuestionIndex]);
       checkAnswer(data.results[currentQuestionIndex]);
-      if (currentQuestionIndex >= 2) {
+      if (currentQuestionIndex >= 10) {
         // Fin del quiz
         alert("Quiz completado!");
         document.getElementById("answer-section").innerHTML = ""
@@ -116,6 +120,7 @@ async function getData() {
         };
         writeNameDB(formData);
       }
+
       currentQuestionIndex++;
       contadorPreguntas++;
     });
