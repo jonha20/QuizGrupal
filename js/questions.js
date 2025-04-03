@@ -50,7 +50,9 @@ function checkAnswer(selectedAnswer, correctAnswer) {
     questionColor.style.backgroundColor = "";
     questionColor.style.color = "";
     questionColor.style.textDecoration = "";
-
+    if (selectedAnswer) {
+      console.log("Hello");
+    }
     if (questionColor.textContent === selectedAnswer) {
       if (selectedAnswer === correctAnswer) {
         questionColor.style.backgroundColor = "#4CAF50";
