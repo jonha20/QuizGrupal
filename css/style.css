@@ -16,18 +16,18 @@
 
 /*estilos para el formulario*/
 
-p{
+p {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
   gap: 2em;
 }
-form input{
-  width:100%;
+form input {
+  width: 100%;
   padding: 1em;
   margin: 1em 0;
   font-size: 1em;
@@ -36,15 +36,17 @@ form input{
   background-color: var(--color-primario);
   color: var(--color-secundario);
 }
+
 form button , #salir ,#btn{
   padding: 0.2em;
   border: none;
   font-size: 1.5em;
-  border-radius:20em;
+  border-radius: 20em;
   background-color: var(--color-secundario);
   color: var(--color-primario);
   cursor: pointer;
 }
+
 
 form button:hover , #salir , #btn
 {
@@ -54,7 +56,6 @@ form button:hover , #salir , #btn
   color: var(--color-primario);
   transition: all 0.3s ease-in-out;
 }
-
 
 /*question*/
 
@@ -106,8 +107,8 @@ li {
   box-shadow: 0px 0px 10px var(--color-secundario);
 }
 .btn {
-  background-color:var(--color-secundario);
-  color:var(--color-primario);
+  background-color: var(--color-secundario);
+  color: var(--color-primario);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -123,13 +124,13 @@ li {
 }
 
 .btn:hover {
-  background-color:#290138;
+  background-color: #290138;
   box-shadow: 0px 6px 10px var(--color-primario);
   transform: translateY(-2px);
   color: var(--color-primario);
-};
+}
 
-.footer{
+.footer {
   display: block;
   position: fixed;
   bottom: 0;
@@ -146,4 +147,8 @@ li {
   gap: 1em;
   margin-top: 2em;
   width: 80%;
+}
+
+#resultados-button {
+  display: none;
 }
