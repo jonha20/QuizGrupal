@@ -1,0 +1,154 @@
+/* BASIC RESET */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --color-primario: #f6f6f6;
+  --color-secundario: #000000;
+  --color-fondo: #7826ba;
+}
+
+/*estilos para el formulario*/
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+form input {
+  width: 100%;
+  padding: 1em;
+  margin: 1em 0;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: var(--color-primario);
+  color: var(--color-secundario);
+}
+
+form button , #salir ,#btn{
+  padding: 0.2em;
+  border: none;
+  font-size: 1.5em;
+  border-radius: 20em;
+  background-color: var(--color-secundario);
+  color: var(--color-primario);
+  cursor: pointer;
+}
+
+
+form button:hover , #salir , #btn
+{
+  background-color:#290138;
+  box-shadow: 0px 6px 10px var(--color-primario);
+  transform: translateY(-2px);
+  color: var(--color-primario);
+  transition: all 0.3s ease-in-out;
+}
+
+/*question*/
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-primario);
+  display: flex;
+  align-items: center;
+  gap: 5em;
+  flex-direction: column;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+  text-align: center;
+}
+
+article p {
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+article {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 7em;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px var(--color-secundario);
+}
+li {
+  margin: 0.5em 0;
+  list-style: none;
+  padding: 0.7em;
+  font-size: 1.2em;
+  border-radius: 12px;
+  background-color: var(--color-primario);
+  color: var(--color-secundario);
+  box-shadow: 0px 0px 10px var(--color-secundario);
+}
+.btn {
+  background-color: var(--color-secundario);
+  color: var(--color-primario);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-top: 3em;
+  cursor: pointer;
+  border: none;
+  border-radius: 20em;
+  box-shadow: 0px 4px 8px var(--color-secundario);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #290138;
+  box-shadow: 0px 6px 10px var(--color-primario);
+  transform: translateY(-2px);
+  color: var(--color-primario);
+}
+
+.footer {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+  padding-bottom: 1em;
+}
+#answer-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 2em;
+  width: 80%;
+}
+
+#resultados-button {
+  display: none;
+}
