@@ -10,8 +10,6 @@ firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
 
 const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
 
-
-
 //**********AUTHENTICATION**********
 const createUser = (user) => {
   db.collection("users")
@@ -34,7 +32,6 @@ firebase
     createUser({
       email: user.email,
       id: user.id,
-     
     });
 
   })
@@ -95,13 +92,33 @@ firebase.auth().signOut().then(() => {
   console.log("hubo un error: " + error);
 });
 }
-
+document.getElementById("btn").addEventListener("click", function (event) {
+  sessionStorage.removeItem("usuarios");
+  let nombre = prompt("Introduzca su nombre")
+  const formData = {
+    name: nombre
+  };
+  let usuarios = sessionStorage.getItem("usuarios") || "[]"; 
+  usuarios = JSON.parse(usuarios);
+  usuarios.push(formData);
+  sessionStorage.setItem("usuarios", JSON.stringify(usuarios));
+  window.location.href = "./questions.html";
+})
 
 document.getElementById("form2").addEventListener("submit", function (event) {
 event.preventDefault();
 let email = event.target.elements.email2.value;
 let pass = event.target.elements.pass3.value;
+let nombre = email.split("@")
 signInUser(email, pass)
+sessionStorage.removeItem("usuarios");
+  const formData = {
+    name: nombre[0]
+  };
+  let usuarios = sessionStorage.getItem("usuarios") || "[]"; 
+  usuarios = JSON.parse(usuarios);
+  usuarios.push(formData);
+  sessionStorage.setItem("usuarios", JSON.stringify(usuarios));
 window.location.href = "./questions.html";
 })
 document.getElementById("salir").addEventListener("click", signOut);

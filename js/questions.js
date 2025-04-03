@@ -11,10 +11,11 @@ firebase.initializeApp(firebaseConfig); // Inicializaar app Firebase
 
 const db = firebase.firestore(); // db representa mi BBDD //inicia Firestore
 
-let arraySession = JSON.parse(sessionStorage.getItem("usuarios"));
-let nombre = arraySession[0].name;
+let arraySession = JSON.parse(sessionStorage.getItem('usuarios')) ;
+let nombre = arraySession[0].name
+  
+let aciertos = 0
 
-let aciertos = 0;
 function paintQuestions(dataset) {
   document.getElementById("questions-section").innerHTML = "";
   document.getElementById("questions-section").innerHTML = `

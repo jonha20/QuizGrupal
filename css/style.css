@@ -36,8 +36,8 @@ form input {
   background-color: var(--color-primario);
   color: var(--color-secundario);
 }
-form button,
-#salir {
+
+form button , #salir ,#btn{
   padding: 0.2em;
   border: none;
   font-size: 1.5em;
@@ -47,9 +47,10 @@ form button,
   cursor: pointer;
 }
 
-form button:hover,
-#salir {
-  background-color: #290138;
+
+form button:hover , #salir , #btn
+{
+  background-color:#290138;
   box-shadow: 0px 6px 10px var(--color-primario);
   transform: translateY(-2px);
   color: var(--color-primario);
