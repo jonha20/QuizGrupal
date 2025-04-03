@@ -125,7 +125,7 @@ async function getData() {
         document
           .getElementById("resultados-button")
           .addEventListener("click", () => {
-            window.location.href = "./results.html";
+            window.location.href = "../pages/results.html";
           });
       } else if (currentQuestionIndex < 9) {
         document.getElementById("resultados-button").style.display = "none";
