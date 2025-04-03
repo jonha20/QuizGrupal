@@ -12,7 +12,8 @@ firebase.initializeApp(firebaseConfig); // Inicializaar app Firebase
 const db = firebase.firestore(); // db representa mi BBDD //inicia Firestore
 
 let arraySession = JSON.parse(sessionStorage.getItem('usuarios')) ;
-let nombre = arraySession[0].name
+
+
   
 let aciertos = 0
 
@@ -125,6 +126,14 @@ async function getData() {
       if (currentQuestionIndex >= 9) {
         document.getElementById("next-button").style.display = "none";
         document.getElementById("resultados-button").style.display = "block";
+        alert("Quiz completado!");
+        document.getElementById("answer-section").innerHTML = "";
+        let nombre = arraySession[0].name
+        const formData = {
+          name: nombre,
+          aciertos: aciertos,
+        };
+        writeNameDB(formData);
         document
           .getElementById("resultados-button")
           .addEventListener("click", () => {
@@ -135,7 +144,7 @@ async function getData() {
       }
 
       checkAnswer(data.results[currentQuestionIndex]);
-      if (currentQuestionIndex >= 10) {
+    /*  if (currentQuestionIndex >= 10) {
         // Fin del quiz
         alert("Quiz completado!");
         document.getElementById("answer-section").innerHTML = "";
@@ -145,7 +154,7 @@ async function getData() {
         };
         writeNameDB(formData);
         goResults();
-      }
+      }*/
 
       currentQuestionIndex++;
       contadorPreguntas++;
