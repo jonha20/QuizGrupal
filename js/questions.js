@@ -11,11 +11,9 @@ firebase.initializeApp(firebaseConfig); // Inicializaar app Firebase
 
 const db = firebase.firestore(); // db representa mi BBDD //inicia Firestore
 
-let arraySession = JSON.parse(sessionStorage.getItem('usuarios')) ;
+let arraySession = JSON.parse(sessionStorage.getItem("usuarios"));
 
-
-  
-let aciertos = 0
+let aciertos = 0;
 
 function paintQuestions(dataset) {
   document.getElementById("questions-section").innerHTML = "";
@@ -74,6 +72,9 @@ function checkAnswer(selectedAnswer, correctAnswer) {
             correctQuestion.style.color = "white";
           }
         });
+        answerElements.forEach((answerElement) => {
+          answerElement.onclick = null;
+        });
       }
     }
   });
@@ -128,7 +129,7 @@ async function getData() {
         document.getElementById("resultados-button").style.display = "block";
         alert("Quiz completado!");
         document.getElementById("answer-section").innerHTML = "";
-        let nombre = arraySession[0].name
+        let nombre = arraySession[0].name;
         const formData = {
           name: nombre,
           aciertos: aciertos,
@@ -144,7 +145,7 @@ async function getData() {
       }
 
       checkAnswer(data.results[currentQuestionIndex]);
-    /*  if (currentQuestionIndex >= 10) {
+      /*  if (currentQuestionIndex >= 10) {
         // Fin del quiz
         alert("Quiz completado!");
         document.getElementById("answer-section").innerHTML = "";
