@@ -11,11 +11,9 @@ firebase.initializeApp(firebaseConfig); // Inicializaar app Firebase
 
 const db = firebase.firestore(); // db representa mi BBDD //inicia Firestore
 
-let arraySession = JSON.parse(sessionStorage.getItem('usuarios')) ;
+let arraySession = JSON.parse(sessionStorage.getItem("usuarios"));
 
-
-  
-let aciertos = 0
+let aciertos = 0;
 
 function paintQuestions(dataset) {
   document.getElementById("questions-section").innerHTML = "";
@@ -46,17 +44,22 @@ function shuffleArray(array) {
   }
   return array;
 }
+
 function checkAnswer(selectedAnswer, correctAnswer) {
   const answerElements = document.querySelectorAll("#answer-section li");
+
+  document.getElementById("next-button").disabled = true;
+
+  if (selectedAnswer) {
+    document.getElementById("next-button").disabled = false;
+  }
 
   answerElements.forEach((questionColor) => {
     // Resetear estilos
     questionColor.style.backgroundColor = "";
     questionColor.style.color = "";
     questionColor.style.textDecoration = "";
-    if (selectedAnswer) {
-      console.log("Hello");
-    }
+
     if (questionColor.textContent === selectedAnswer) {
       if (selectedAnswer === correctAnswer) {
         questionColor.style.backgroundColor = "#4CAF50";
@@ -74,10 +77,27 @@ function checkAnswer(selectedAnswer, correctAnswer) {
             correctQuestion.style.color = "white";
           }
         });
+        answerElements.forEach((answerElement) => {
+          answerElement.onclick = null;
+        });
       }
     }
   });
 }
+
+// Agregar el evento para el botón "next"
+// document.getElementById("next-button").addEventListener("click", () => {
+//   if (selectedAnswer != null) {
+//     document.getElementById("next-button").disabled = false;
+//     // Si el botón no está deshabilitado, avanza a la siguiente pregunta
+//     console.log("Avanzando a la siguiente pregunta...");
+//     // Aquí puedes incluir la lógica para cargar la siguiente pregunta
+//   } else {
+//     // Si no se seleccionó respuesta, muestra un mensaje
+//     alert("Por favor, selecciona una respuesta antes de continuar.");
+//   }
+// });
+
 // Funcion para eliminar todo
 const goResults = () => {
   const results = confirm("¿Quieres ver los resultados?");
@@ -99,7 +119,9 @@ const writeNameDB = (array) => {
 async function getData() {
   try {
     // 1 - Obtención de datos
-    const response = await fetch("../json/questions.json");
+    const response = await fetch(
+      "https://opentdb.com/api.php?amount=10&category=9&type=multiple"
+    );
 
     // Verificar si la respuesta es exitosa
     if (!response.ok) {
@@ -128,7 +150,7 @@ async function getData() {
         document.getElementById("resultados-button").style.display = "block";
         alert("Quiz completado!");
         document.getElementById("answer-section").innerHTML = "";
-        let nombre = arraySession[0].name
+        let nombre = arraySession[0].name;
         const formData = {
           name: nombre,
           aciertos: aciertos,
@@ -144,7 +166,7 @@ async function getData() {
       }
 
       checkAnswer(data.results[currentQuestionIndex]);
-    /*  if (currentQuestionIndex >= 10) {
+      /*  if (currentQuestionIndex >= 10) {
         // Fin del quiz
         alert("Quiz completado!");
         document.getElementById("answer-section").innerHTML = "";
