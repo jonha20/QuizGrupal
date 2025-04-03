@@ -20,10 +20,10 @@ const createUser = (user) => {
     .catch((error) => console.error("Error adding document: ", error));
 };
 
-const signUpUser = (email, password) => {
+const signUpUser = ( email, password) => {
 firebase
   .auth()
-  .createUserWithEmailAndPassword(email, password)
+  .createUserWithEmailAndPassword( email, password)
   .then((userCredential) => {
     // Signed in
     let user = userCredential.user;
@@ -34,6 +34,7 @@ firebase
     createUser({
       email: user.email,
       id: user.id,
+     
     });
 
   })
@@ -48,9 +49,23 @@ event.preventDefault();
 let email = event.target.elements.email.value;
 let pass = event.target.elements.pass.value;
 let pass2 = event.target.elements.pass2.value;
+let error="";
+let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_.,-])[A-Za-z\d@$!%*?&_.,-]{8,}$/;
+//....//
+if (emailRegex.test(email)) {
+} else {
+  alert((error += "Formato email incorrecto\n"));
 
-pass === pass2 ? signUpUser(email, pass) : alert("error password");
+}
+if (passwordRegex.test(pass)) {
+} else {
+  alert((error += "Formato contraseña incorrecto\n"));
+}
+
+pass === pass2 ? signUpUser( email, pass) : alert("error password");
 })
+
 
 
 const signInUser = (email, password) => {
